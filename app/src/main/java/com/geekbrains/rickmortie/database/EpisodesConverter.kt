@@ -8,7 +8,7 @@ class EpisodesConverter {
         @JvmStatic
         @TypeConverter
         fun toEpisodes(episodes: String): List<String> {
-            val data = episodes.split(";")
+            val data = episodes.split(",")
             val converted = mutableListOf<String>()
             data.forEach {
                 converted.add(it)
@@ -19,7 +19,7 @@ class EpisodesConverter {
         @JvmStatic
         @TypeConverter
         fun fromEpisodes(episodes: List<String>): String {
-            return episodes.joinToString { ";" }
+            return episodes.joinToString { it }
         }
     }
 }

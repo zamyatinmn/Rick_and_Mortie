@@ -17,13 +17,13 @@ class MainRepository @Inject constructor(
     }
 
     // TODO: 13.11.2021 Сделать пагинацию
-    private val page = 1
-    private val count = 20
+    private var page = 1
+    private val count = 30
     private val min = count * page - count
     private val max = count * page
 
-    fun fetchCharacterList(page: Int): Observable<List<Character>> =
-        client.getCharacterInfo("").toObservable()
+    fun fetchCharacterList(): Observable<List<Character>> =
+        client.getMultipleCharacters((min.exclusiveRangeTo(max)).toList()).toObservable()
             .doOnNext {
                 dao.insertCharacterList(it)
             }
@@ -33,4 +33,7 @@ class MainRepository @Inject constructor(
             .onErrorResumeNext {
                 dao.getCharacterList(min, max).toObservable()
             }
+            .doOnNext { page++ }
+
+    private fun Int.exclusiveRangeTo(other: Int): IntRange = IntRange(this + 1, other)
 }

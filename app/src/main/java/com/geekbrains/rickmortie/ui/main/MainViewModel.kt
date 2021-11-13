@@ -23,12 +23,10 @@ class MainViewModel : ViewModel() {
     private val subjectLoading = BehaviorSubject.create<Unit>()
     private val subjectRequest = BehaviorSubject.create<Unit>()
 
-    private var nextPage = 1
-
     private val observableResponse = subjectRequest
         .doOnNext { subjectLoading.onNext(Unit) }
         .flatMap {
-            repository.fetchCharacterList(nextPage).map {
+            repository.fetchCharacterList().map {
                 AppState.Success(it)
             }
         }
