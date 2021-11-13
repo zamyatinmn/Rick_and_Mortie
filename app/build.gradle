@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.4.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 
     //Dagger 2

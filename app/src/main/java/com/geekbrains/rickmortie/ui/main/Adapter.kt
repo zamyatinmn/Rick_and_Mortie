@@ -37,6 +37,10 @@ class Adapter : RecyclerView.Adapter<BaseViewHolder>() {
         }
     }
 
+    fun clear(){
+        dataSet.clear()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.character_card, parent, false)

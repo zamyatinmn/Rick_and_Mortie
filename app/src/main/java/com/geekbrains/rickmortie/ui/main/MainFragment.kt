@@ -36,6 +36,12 @@ class MainFragment : ViewBindingFragment<FragmentMainBinding>(FragmentMainBindin
         )
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+
+        binding.refresh.setOnRefreshListener {
+            adapter.clear()
+            viewModel.getData()
+            binding.refresh.isRefreshing = false
+        }
     }
 
     private fun renderData(appState: AppState) {
